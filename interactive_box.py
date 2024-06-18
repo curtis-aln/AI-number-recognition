@@ -1,4 +1,3 @@
-# a box that can be used for the user to create images to test the AI
 import numpy as np
 import numpy.random as random
 import math
@@ -25,9 +24,8 @@ def draw_rect_outline(render_surface : Surface, rect : Rect, color=(255, 255, 25
     draw_line(rect.topright, rect.bottomright)
 
 
-# the values in the grid will be between 0 and 1 for the neural network
 # so we need to convert that to be between 0 and 255 to render
-def value_to_color(value):
+def value01_to_color(value):
     norm = max(0, min(1, value)) * 255
     return (norm, norm, norm)
 
@@ -170,7 +168,7 @@ class InteractiveBox:
                     self.bounds.x + x * self.cell_size.x,
                     self.bounds.y + y * self.cell_size.y,
                     self.cell_size.x, self.cell_size.y)
-                color = value_to_color(self.grid[x][y])
+                color = value01_to_color(self.grid[x][y])
 
                 pg.draw.rect(self.window, color, rect)
 
@@ -196,7 +194,3 @@ class InteractiveBox:
 
         self.text_renderer.draw_text("X", x_axis_p2 + Vec2(cutoff, 0), centered=True)
         self.text_renderer.draw_text("Y", y_axis_p2 + Vec2(0, -cutoff), centered=True)
-
-
-    def _render_gridlines(self):
-        pass

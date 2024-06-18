@@ -7,7 +7,7 @@ import pygame as pg
 from numpy.random import uniform
 from pygame import Rect
 from pygame import Vector2 as Vec2
-from interactive_box import value_to_color, draw_rect_outline
+from interactive_box import value01_to_color, draw_rect_outline
 from settings import *
 
 INIT_WEIGHT_RANGE = 0.1
@@ -110,7 +110,7 @@ class NeuralNetworkRenderer:
         # rendering all of the nodes
         for layer_idx in range(1, self.inputless_shape.size):
             for node_idx in range(self.inputless_shape[layer_idx]):
-                color = value_to_color(self.network.states[layer_idx][node_idx])
+                color = value01_to_color(self.network.states[layer_idx][node_idx])
                 pg.draw.circle(self.render_surface, color, self.positions[layer_idx - 1][node_idx], NODE_RADIUS)
         
     
